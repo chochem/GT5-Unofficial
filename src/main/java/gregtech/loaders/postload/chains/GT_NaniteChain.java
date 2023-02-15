@@ -169,7 +169,7 @@ public class GT_NaniteChain {
                         getModItem("GoodGenerator", "huiCircuit", 1, 4) // Paradox circuit
                 },
                 new FluidStack[] { Materials.UUMatter.getFluid(500_000), Materials.RawStarMatter.getFluid(50_000),
-                        Materials.SpatialFluid.getMolten(720), },
+                        Materials.TemporalFluid.getMolten(720), },
                 new ItemStack[] { Materials.BlackDwarfMatter.getNanite(4) },
                 null,
                 null,
