@@ -929,16 +929,16 @@ public class GT_Loader_Item_Block_And_Fluid implements Runnable {
                         GT_OreDictUnificator.get(OrePrefixes.cell, Materials.RawStarMatter, 1L),
                         ItemList.Cell_Empty.get(1L));
 
-        GT_FluidFactory.builder(Materials.Space.mName).withLocalizedName(Materials.Space.mLocalizedName)
-                .withStateAndTemperature(MOLTEN, 0).buildAndRegister().configureMaterials(Materials.Space)
+        GT_FluidFactory.builder(Materials.SpatialFluid.mName).withLocalizedName(Materials.SpatialFluid.mLocalizedName)
+                .withStateAndTemperature(MOLTEN, 0).buildAndRegister().configureMaterials(Materials.SpatialFluid)
                 .registerBContainers(
-                        GT_OreDictUnificator.get(OrePrefixes.cell, Materials.Space, 1L),
+                        GT_OreDictUnificator.get(OrePrefixes.cell, Materials.SpatialFluid, 1L),
                         ItemList.Cell_Empty.get(1L));
 
-        GT_FluidFactory.builder(Materials.Time.mName).withLocalizedName(Materials.Time.mLocalizedName)
-                .withStateAndTemperature(MOLTEN, 0).buildAndRegister().configureMaterials(Materials.Time)
+        GT_FluidFactory.builder(Materials.TemporalFluid.mName).withLocalizedName(Materials.TemporalFluid.mLocalizedName)
+                .withStateAndTemperature(MOLTEN, 0).buildAndRegister().configureMaterials(Materials.TemporalFluid)
                 .registerBContainers(
-                        GT_OreDictUnificator.get(OrePrefixes.cell, Materials.Time, 1L),
+                        GT_OreDictUnificator.get(OrePrefixes.cell, Materials.TemporalFluid, 1L),
                         ItemList.Cell_Empty.get(1L));
 
         GT_FluidFactory.builder("fieryblood").withLocalizedName("Fiery Blood").withStateAndTemperature(LIQUID, 6400)
