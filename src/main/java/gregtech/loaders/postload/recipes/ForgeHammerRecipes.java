@@ -85,7 +85,7 @@ public class ForgeHammerRecipes implements Runnable {
                 new ItemStack[] { ItemList.Tesseract.get(1L), getModItem(MOD_ID_GTPP, "MU-metaitem.01", 1, 32105) },
                 new FluidStack[] { Materials.SpaceTime.getMolten(2880L) },
                 null,
-                new FluidStack[] { Materials.Space.getMolten(1440L), Materials.Time.getMolten(1440L) },
+                new FluidStack[] { Materials.SpatialFluid.getMolten(1440L), Materials.TemporalFluid.getMolten(1440L) },
                 10 * 20,
                 (int) TierEU.RECIPE_UXV);
 
