@@ -21,6 +21,7 @@ import gregtech.api.util.GTLog;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.extensions.ArrayExt;
 
 public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistrator {
 
@@ -214,7 +215,27 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                 GTLog.out.println("Desh: crushed is not null");
                 ItemStack output = GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed);
                 GTLog.out.println("Input: " + aOreStack.getDisplayName());
+                GTLog.out.println("Amount: " + aOreStack.stackSize);
                 GTLog.out.println("Output: " + output.getDisplayName());
+                GTLog.out.println("Amount: " + output.stackSize);
+                ItemStack[] compared = GTOreDictUnificator.setStackArray(
+                    true,
+                    false,
+                    ArrayExt.withoutTrailingNulls(new ItemStack[] { aOreStack }, ItemStack[]::new));
+                GTLog.out.println("Compared to: ");
+                for (ItemStack itemstack : compared) {
+                    GTLog.out.println("Item: " + itemstack.getDisplayName());
+                }
+                ItemStack[] compared2 = GTOreDictUnificator.setStackArray(
+                    true,
+                    false,
+                    ArrayExt.withoutTrailingNulls(
+                        new ItemStack[] { GTOreDictUnificator.get(aPrefix, aMaterial, 1L) },
+                        ItemStack[]::new));
+                GTLog.out.println("Compared to: ");
+                for (ItemStack itemstack : compared2) {
+                    GTLog.out.println("Item: " + itemstack.getDisplayName());
+                }
             }
             GTValues.RA.stdBuilder()
                 .itemInputs(aOreStack)
@@ -222,6 +243,12 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                 .duration(10)
                 .eut(16)
                 .addTo(hammerRecipes);
+            GTValues.RA.stdBuilder()
+                .itemInputs(GTOreDictUnificator.get(aPrefix, aMaterial, 1L))
+                .itemOutputs(GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed))
+                .duration(10)
+                .eut(16)
+                .addTo(centrifugeRecipes);
 
             int chanceOre2 = tPrimaryByProduct == null ? 0
                 : tPrimaryByProduct.stackSize * 10 * aMultiplier * aMaterial.mByProductMultiplier;
