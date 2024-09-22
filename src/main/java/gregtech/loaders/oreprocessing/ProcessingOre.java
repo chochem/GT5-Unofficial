@@ -236,6 +236,13 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                 for (ItemStack itemstack : compared2) {
                     GTLog.out.println("Item: " + itemstack.getDisplayName());
                 }
+                ItemStack A = compared[0];
+                ItemStack B = compared2[0];
+                if (A.isItemEqual(B)) {
+                    GTLog.out.println("They are the same");
+                } else {
+                    GTLog.out.println("They are not the same");
+                }
             }
             GTValues.RA.stdBuilder()
                 .itemInputs(aOreStack)
