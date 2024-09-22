@@ -1146,7 +1146,7 @@ public enum OrePrefixes {
         mLocalizedMaterialPost = aLocalizedMaterialPost;
         mDefaultStackSize = (byte) aDefaultStackSize;
         mTextureIndex = (short) aTextureindex;
-        used = null;
+        used = new HashSet<>();
 
         if (name().startsWith("ore")) {
             new TC_AspectStack(TCAspects.TERRA, 1).addToAspectList(mAspects);
