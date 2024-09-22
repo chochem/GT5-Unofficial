@@ -1305,13 +1305,15 @@ public enum OrePrefixes {
 
     public void processOre(Materials aMaterial, String aOreDictName, String aModName, ItemStack aStack) {
 
-        if (aMaterial == null) {
+        if (aMaterial == null || aMaterial == Materials._NULL) {
             return;
         }
 
-        if (aMaterial != Materials._NULL && !used.add(aMaterial)) {
-            GTLog.out.println("Duplicate material registry attempted by " + aModName + " for " + aOreDictName);
+        if (!used.add(aMaterial)) {
+            GTLog.out.println("Duplicate material recipe registry attempted by " + aModName + " for " + aOreDictName);
             return;
+        } else {
+            GTLog.out.println("New material recipe registry by " + aModName + " for " + aOreDictName);
         }
 
         if (aMaterial.contains(SubTag.NO_RECIPES)) {
