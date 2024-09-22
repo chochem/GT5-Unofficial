@@ -212,8 +212,9 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
         if (tCrushed != null) {
             if (aMaterial == Materials.Desh) {
                 GTLog.out.println("Desh: crushed is not null");
-                ItemStack test = GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed);
-                GTLog.out.println("Output" + test.getUnlocalizedName());
+                ItemStack output = GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed);
+                GTLog.out.println("Input: " + aOreStack.getDisplayName());
+                GTLog.out.println("Output: " + output.getDisplayName());
             }
             GTValues.RA.stdBuilder()
                 .itemInputs(aOreStack)
@@ -226,7 +227,7 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                 : tPrimaryByProduct.stackSize * 10 * aMultiplier * aMaterial.mByProductMultiplier;
             chanceOre2 = 100 * chanceOre2; // converting to the GT format, 100% is 10000
             GTValues.RA.stdBuilder()
-                .itemInputs(GTOreDictUnificator.get(aPrefix, aMaterial, 1L))
+                .itemInputs(GTUtility.copyAmount(1, aOreStack))
                 .itemOutputs(
                     GTUtility.mul(2, tCrushed),
                     tMaterial.contains(SubTag.PULVERIZING_CINNABAR) ? GTOreDictUnificator.get(
