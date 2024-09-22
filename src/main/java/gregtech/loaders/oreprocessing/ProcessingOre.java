@@ -17,6 +17,7 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
 import gregtech.api.enums.TierEU;
+import gregtech.api.util.GTLog;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
@@ -115,6 +116,9 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                 tMaterial,
                 GTUtility.copyAmount(aMaterial.mOreMultiplier * aMultiplier, tCleaned, tDust, tGem),
                 (long) aMaterial.mOreMultiplier * aMultiplier);
+            if (aMaterial == Materials.Desh) {
+                GTLog.out.println("Desh: crushed is null");
+            }
         }
 
         for (Materials tMat : aMaterial.mOreByProducts) {
@@ -206,6 +210,9 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
         }
 
         if (tCrushed != null) {
+            if (aMaterial == Materials.Desh) {
+                GTLog.out.println("Desh: crushed is not null");
+            }
             GTValues.RA.stdBuilder()
                 .itemInputs(aOreStack)
                 .itemOutputs(GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed))
