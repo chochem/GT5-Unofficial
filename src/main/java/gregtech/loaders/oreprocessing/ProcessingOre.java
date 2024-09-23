@@ -246,25 +246,27 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                 } else {
                     GTLog.out.println("They are not the same");
                 }
+                // extra test recipes
+                GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(Mods.GalacticraftMars.ID, "tile.mars", 1, 2))
+                    .itemOutputs(GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed))
+                    .duration(10)
+                    .eut(16)
+                    .addTo(centrifugeRecipes);
+                GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(Mods.GalaxySpace.ID, "phobosblocks", 1, 3))
+                    .itemOutputs(GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed))
+                    .duration(10)
+                    .eut(16)
+                    .addTo(autoclaveRecipes);
             }
+
             GTValues.RA.stdBuilder()
                 .itemInputs(aOreStack)
                 .itemOutputs(GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed))
                 .duration(10)
                 .eut(16)
                 .addTo(hammerRecipes);
-            GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(Mods.GalacticraftMars.ID, "tile.mars", 1, 2))
-                .itemOutputs(GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed))
-                .duration(10)
-                .eut(16)
-                .addTo(centrifugeRecipes);
-            GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(Mods.GalaxySpace.ID, "phobosblocks", 1, 3))
-                .itemOutputs(GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed))
-                .duration(10)
-                .eut(16)
-                .addTo(autoclaveRecipes);
 
             int chanceOre2 = tPrimaryByProduct == null ? 0
                 : tPrimaryByProduct.stackSize * 10 * aMultiplier * aMaterial.mByProductMultiplier;
