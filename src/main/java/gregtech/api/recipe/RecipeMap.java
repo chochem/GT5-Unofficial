@@ -1,6 +1,8 @@
 package gregtech.api.recipe;
 
 import static gregtech.api.util.GTRecipeBuilder.ENABLE_COLLISION_CHECK;
+import static gregtech.api.util.GTRecipeBuilder.handleInvalidRecipeLowFluids;
+import static gregtech.api.util.GTRecipeBuilder.handleInvalidRecipeLowItems;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -124,8 +126,14 @@ public final class RecipeMap<B extends RecipeMapBackend> implements IRecipeMap {
     public GTRecipe addRecipe(GTRecipe aRecipe, boolean aCheckForCollisions, boolean aFakeRecipe, boolean aHidden) {
         aRecipe.mHidden = aHidden;
         aRecipe.mFakeRecipe = aFakeRecipe;
-        if (aRecipe.mFluidInputs.length < backend.properties.minFluidInputs
-            && aRecipe.mInputs.length < backend.properties.minItemInputs) return null;
+        if (aRecipe.mFluidInputs.length < backend.properties.minFluidInputs) {
+            handleInvalidRecipeLowFluids();
+            return null;
+        }
+        if (aRecipe.mInputs.length < backend.properties.minItemInputs) {
+            handleInvalidRecipeLowItems();
+            return null;
+        }
         if (aCheckForCollisions && ENABLE_COLLISION_CHECK && backend.checkCollision(aRecipe)) return null;
         return backend.compileRecipe(aRecipe);
     }

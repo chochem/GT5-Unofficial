@@ -1,11 +1,12 @@
 package gregtech.loaders.oreprocessing;
 
-import static gregtech.api.recipe.RecipeMaps.autoclaveRecipes;
-import static gregtech.api.recipe.RecipeMaps.benderRecipes;
+import static gregtech.api.GregTechAPI.sBlockOres1;
 import static gregtech.api.recipe.RecipeMaps.blastFurnaceRecipes;
 import static gregtech.api.recipe.RecipeMaps.centrifugeRecipes;
 import static gregtech.api.recipe.RecipeMaps.hammerRecipes;
 import static gregtech.api.recipe.RecipeMaps.maceratorRecipes;
+import static gregtech.api.recipe.RecipeMaps.mixerRecipes;
+import static gregtech.api.recipe.RecipeMaps.polarizerRecipes;
 import static gregtech.api.recipe.RecipeMaps.wiremillRecipes;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
@@ -254,25 +255,25 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                     .itemOutputs(GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed))
                     .duration(10)
                     .eut(16)
-                    .addTo(centrifugeRecipes);
+                    .addTo(centrifugeRecipes); // works but is not unified!
                 GTValues.RA.stdBuilder()
                     .itemInputs(getModItem(Mods.GalaxySpace.ID, "phobosblocks", 1, 3))
                     .itemOutputs(GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed))
                     .duration(10)
                     .eut(16)
-                    .addTo(autoclaveRecipes);
+                    .addTo(mixerRecipes); // works but is not unified!
                 GTValues.RA.stdBuilder()
-                    .itemInputs(getModItem(Mods.GregTech.ID, "gt.blockores", 1, 884))
+                    .itemInputs(new ItemStack(sBlockOres1, 1, 884))
                     .itemOutputs(GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed))
                     .duration(10)
                     .eut(16)
-                    .addTo(benderRecipes);
+                    .addTo(polarizerRecipes); // works and cycles
                 GTValues.RA.stdBuilder()
                     .itemInputs(GTOreDictUnificator.get(aPrefix, aMaterial, 1L))
                     .itemOutputs(GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed))
                     .duration(10)
                     .eut(16)
-                    .addTo(wiremillRecipes);
+                    .addTo(wiremillRecipes); // works and cycles
             }
 
             GTValues.RA.stdBuilder()
