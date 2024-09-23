@@ -2,6 +2,8 @@ package gregtech.api.recipe;
 
 import static gregtech.api.util.GTRecipeBuilder.ENABLE_COLLISION_CHECK;
 import static gregtech.api.util.GTRecipeBuilder.handleInvalidRecipe;
+import static gregtech.api.util.GTRecipeBuilder.handleInvalidRecipeLowFluids;
+import static gregtech.api.util.GTRecipeBuilder.handleInvalidRecipeLowItems;
 import static gregtech.api.util.GTRecipeBuilder.handleRecipeCollision;
 import static gregtech.api.util.GTUtility.areStacksEqualOrNull;
 
@@ -378,6 +380,7 @@ public class RecipeMapBackend {
                 int count = 0;
                 for (FluidStack fluid : fluids) if (fluid != null) count++;
                 if (count < properties.minFluidInputs) {
+                    handleInvalidRecipeLowFluids();
                     return Stream.empty();
                 }
             }
@@ -385,6 +388,7 @@ public class RecipeMapBackend {
                 int count = 0;
                 for (ItemStack item : rawItems) if (item != null) count++;
                 if (count < properties.minItemInputs) {
+                    handleInvalidRecipeLowItems();
                     return Stream.empty();
                 }
             }
