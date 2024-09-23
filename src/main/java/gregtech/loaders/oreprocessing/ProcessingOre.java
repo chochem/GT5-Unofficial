@@ -1,10 +1,12 @@
 package gregtech.loaders.oreprocessing;
 
 import static gregtech.api.recipe.RecipeMaps.autoclaveRecipes;
+import static gregtech.api.recipe.RecipeMaps.benderRecipes;
 import static gregtech.api.recipe.RecipeMaps.blastFurnaceRecipes;
 import static gregtech.api.recipe.RecipeMaps.centrifugeRecipes;
 import static gregtech.api.recipe.RecipeMaps.hammerRecipes;
 import static gregtech.api.recipe.RecipeMaps.maceratorRecipes;
+import static gregtech.api.recipe.RecipeMaps.wiremillRecipes;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 import static gregtech.api.util.GTRecipeConstants.COIL_HEAT;
@@ -214,7 +216,7 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
         }
 
         if (tCrushed != null) {
-            if (aMaterial == Materials.Desh) {
+            if (aMaterial == Materials.Desh && aPrefix == OrePrefixes.ore) {
                 GTLog.out.println("Desh: crushed is not null. Reached the relevant code section.");
                 ItemStack output = GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed);
                 GTLog.out.println("Input: " + aOreStack.getDisplayName());
@@ -259,6 +261,18 @@ public class ProcessingOre implements gregtech.api.interfaces.IOreRecipeRegistra
                     .duration(10)
                     .eut(16)
                     .addTo(autoclaveRecipes);
+                GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(Mods.GregTech.ID, "gt.blockores", 1, 884))
+                    .itemOutputs(GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed))
+                    .duration(10)
+                    .eut(16)
+                    .addTo(benderRecipes);
+                GTValues.RA.stdBuilder()
+                    .itemInputs(GTOreDictUnificator.get(aPrefix, aMaterial, 1L))
+                    .itemOutputs(GTUtility.copy(GTUtility.copyAmount(tCrushed.stackSize, tGem), tCrushed))
+                    .duration(10)
+                    .eut(16)
+                    .addTo(wiremillRecipes);
             }
 
             GTValues.RA.stdBuilder()
