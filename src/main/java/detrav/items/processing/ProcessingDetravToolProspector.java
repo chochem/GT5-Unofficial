@@ -19,6 +19,7 @@ import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTOreDictUnificator;
 
 /**
  * Created by wital_000 on 18.03.2016.
@@ -26,13 +27,14 @@ import gregtech.api.util.GTModHandler;
 public class ProcessingDetravToolProspector implements gregtech.api.interfaces.IOreRecipeRegistrator {
 
     public ProcessingDetravToolProspector() {
-
+        OrePrefixes.toolHeadDrill.add(this);
     }
 
     public void registerOre(OrePrefixes aPrefix, Materials material, String aOreDictName, String aModName,
         ItemStack aStack) {
         if (!aPrefix.doGenerateItem(material)) return;
         if (DetravScannerMod.DEBUG_ENABLED) return;
+        if (GTOreDictUnificator.get(OrePrefixes.plate, material, 1L) == null) return;
 
         GTModHandler.addCraftingRecipe(
             DetravMetaGeneratedTool01.INSTANCE
